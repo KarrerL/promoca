@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antibes — Promoca</title>
+<meta name="description" content="Les biens Promoca disponibles à Antibes, sur la Côte d'Azur.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header id="siteHeader" class="solid"><div id="site-header"></div></header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="../index.html" data-fr="Accueil" data-en="Home">Accueil</a> / <a href="../index.html#villes" data-fr="Nos biens par ville" data-en="Properties by city">Nos biens par ville</a> / <span>Antibes</span></div>
+    <h1 style="font-size:2.6rem;">Antibes</h1>
+    <p style="max-width:640px;margin-top:10px;">Entre remparts historiques et cap arboré, Antibes réunit patrimoine et art de vivre méditerranéen.</p>
+  </div>
+</section>
+
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal"><h2 data-fr="Biens Promoca à Antibes" data-en="Promoca properties in Antibes">Biens Promoca à Antibes</h2></div>
+    <div class="biens-grid" id="biensGrid"></div>
+    <p id="noResults" style="display:none;text-align:center;padding:30px 0;opacity:.7;" data-fr="Aucun programme en cours actuellement dans cette ville." data-en="No development currently under way in this city.">Aucun programme en cours actuellement dans cette ville.</p>
+  </div>
+</section>
+
+<section style="background:var(--stone);">
+  <div class="wrap">
+    <div class="section-head reveal"><h2 data-fr="Localisation" data-en="Location">Localisation</h2></div>
+    <iframe class="map-embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Antibes+France&output=embed"></iframe>
+  </div>
+</section>
+
+
+<div id="site-footer"></div>
+<script>window.PROMOCA_ROOT = "../";</script>
+<script src="../assets/data.js"></script>
+<script src="../assets/common.js"></script>
+<script>
+(function(){
+  var CITY = "antibes";
+  function render(){
+    var list = PROMOCA_PROPERTIES.filter(function(p){return p.city===CITY;});
+    var grid=document.getElementById('biensGrid'), none=document.getElementById('noResults');
+    var lang = (window.promocaCurrentLang && window.promocaCurrentLang()) || 'fr';
+    if(list.length===0){ grid.style.display='none'; none.style.display='block'; return; }
+    grid.style.display='grid'; none.style.display='none';
+    grid.innerHTML = list.map(function(p){
+      return '<div class="bien-card reveal in"><div class="card-media"><img src="'+p.img+'" alt="'+p.name+'"><span class="badge">'+(lang==='en'?p.badge_en:p.badge_fr)+'</span></div><div class="card-body"><h3>'+p.name+'</h3><p class="card-tag">'+(lang==='en'?p.tag_en:p.tag_fr)+' · '+p.pieces+'</p><p class="card-meta">'+p.price+'</p><a class="card-link" href="../biens/'+p.slug+'.html" data-fr="Découvrir" data-en="Discover">Découvrir</a></div></div>';
+    }).join('');
+  }
+  window.promocaOnLangChange = render;
+  render();
+})();
+</script>
+</body>
+</html>
