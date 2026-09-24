@@ -222,9 +222,10 @@ section{padding:120px 0;}
 .cta-box-sub{display:block; color:rgba(246,242,235,.7); font-size:.86rem;}
 
 /* PRESSE */
-.press-grid{display:flex; flex-wrap:wrap; gap:16px 40px; align-items:center;}
-.press-grid span{font-family:var(--font-display); font-size:1.2rem; color:#8a94a0; opacity:.75; transition:.2s;}
-.press-grid span:hover{opacity:1; color:var(--navy-deep);}
+.press-grid{display:flex; flex-wrap:wrap; gap:40px 60px; align-items:center; justify-content:center;}
+.press-logo{display:flex; align-items:center; justify-content:center; height:42px; width:160px;}
+.press-logo img{display:block; max-height:100%; max-width:100%; width:auto; height:auto; object-fit:contain; filter:grayscale(1); opacity:.6; transition:.25s ease;}
+.press-logo:hover img{filter:grayscale(0); opacity:1;}
 
 /* FOOTER */
 footer{background:var(--navy-deep); color:rgba(246,242,235,.75); padding:80px 0 30px;}
@@ -584,21 +585,21 @@ footer a:hover{color:#fff;}
   <div class="wrap">
     <div class="section-head reveal"><h2 data-fr="On parle de nous" data-en="In the press">On parle de nous</h2><p>Promoca dans les médias et aux côtés de ses partenaires.</p></div>
     <div class="press-grid">
-      <span class="reveal">
+      <a class="press-logo reveal" href="https://www.nicematin.com/immobilier" target="_blank" rel="noopener">
         <img src="https://i.imgur.com/VoSLO3G.png" alt="Nice-Matin">
-      </span>
-      <span class="reveal">
+      </a>
+      <a class="press-logo reveal" href="https://www.lesechos.fr/industrie-services/immobilier-btp" target="_blank" rel="noopener">
         <img src="https://i.imgur.com/MjgrS94.png" alt="Les Echos">
-      </span>
-      <span class="reveal">
+      </a>
+      <a class="press-logo reveal" href="https://immobilier.lefigaro.fr/" target="_blank" rel="noopener">
         <img src="https://i.imgur.com/BChIZlS.png" alt="Le Figaro Immobilier">
-      </span>
-      <span class="reveal">
+      </a>
+      <a class="press-logo reveal" href="https://www.capital.fr/immobilier" target="_blank" rel="noopener">
         <img src="https://i.imgur.com/7Jca6YL.png" alt="Capital">
-      </span>
-      <span class="reveal">
+      </a>
+      <a class="press-logo reveal" href="https://immo.bfmtv.com/" target="_blank" rel="noopener">
         <img src="https://i.imgur.com/EH1KTWO.png" alt="BFM Immo">
-      </span>
+      </a>
     </div>
   </div>
 </section>
