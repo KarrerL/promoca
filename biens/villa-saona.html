@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Villas Saona — Cagnes-sur-Mer — Promoca</title>
+<meta name="description" content="Villas Saona, Villas jumelées à Cagnes-sur-Mer. Dès 880 000 €.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header id="siteHeader" class="solid"><div id="site-header"></div></header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="../index.html" data-fr="Accueil" data-en="Home">Accueil</a> / <a href="../nos-programmes.html" data-fr="Nos programmes" data-en="Our developments">Nos programmes</a> / <span>Villas Saona</span></div>
+    <h1 style="font-size:2.6rem;">Villas Saona</h1>
+    <p style="max-width:640px;margin-top:10px;" data-fr="Villas jumelées · Cagnes-sur-Mer · Dès 880 000 €" data-en="Semi-detached villas · Cagnes-sur-Mer · Dès 880 000 €">Villas jumelées · Cagnes-sur-Mer · Dès 880 000 €</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="display:grid;grid-template-columns:1.2fr 1fr;gap:60px;">
+    <div class="reveal">
+      <div style="border-radius:2px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,42,58,.35);">
+        <img src="https://i.imgur.com/MRMmBCs.jpeg" alt="Villas Saona" style="width:100%;height:460px;object-fit:cover;">
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="badge" style="position:static;display:inline-block;margin-bottom:16px;" data-fr="Travaux en cours" data-en="Under construction">Travaux en cours</span>
+      <h2 style="font-size:1.8rem;" data-fr="Villas jumelées" data-en="Semi-detached villas">Villas jumelées</h2>
+      <p style="margin-top:14px;" data-fr="Quartier des Gros Buaux à Cagnes-sur-Mer : 3 villas de 4 pièces jumelées, chacune avec jardin privatif et piscine, dans un quartier calme et recherché. Pompe à chaleur, climatisation et finitions haut de gamme." data-en="Gros Buaux district, Cagnes-sur-Mer: 3 semi-detached 4-room villas, each with a private garden and pool, in a quiet, sought-after neighbourhood. Heat pump, air conditioning and high-end finishes.">Quartier des Gros Buaux à Cagnes-sur-Mer : 3 villas de 4 pièces jumelées, chacune avec jardin privatif et piscine, dans un quartier calme et recherché. Pompe à chaleur, climatisation et finitions haut de gamme.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line);">
+        <div><p style="font-size:.75rem;color:#8a94a0;" data-fr="Ville" data-en="City">Ville</p><p style="font-weight:600;color:var(--navy-deep);">Cagnes-sur-Mer</p></div>
+        <div><p style="font-size:.75rem;color:#8a94a0;" data-fr="Typologie" data-en="Layout">Typologie</p><p style="font-weight:600;color:var(--navy-deep);">4 pièces</p></div>
+        <div><p style="font-size:.75rem;color:#8a94a0;" data-fr="Surface" data-en="Surface">Surface</p><p style="font-weight:600;color:var(--navy-deep);">96 m² habitables, jardins jusqu'à 330 m²</p></div>
+        <div><p style="font-size:.75rem;color:#8a94a0;" data-fr="Prix" data-en="Price">Prix</p><p style="font-weight:600;color:var(--navy-deep);">Dès 880 000 €</p></div>
+      </div>
+      <a href="../index.html#contact" class="btn btn-primary" style="margin-top:30px;display:inline-block;background:var(--navy-deep);color:#fff;" data-fr="Être recontacté pour ce programme" data-en="Request a callback about this development">Être recontacté pour ce programme</a>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--stone);">
+  <div class="wrap">
+    <div class="section-head reveal"><h2 data-fr="Autres programmes à Cagnes-sur-Mer" data-en="Other developments in Cagnes-sur-Mer">Autres programmes à Cagnes-sur-Mer</h2></div>
+    <div class="biens-grid" id="relatedGrid"></div>
+  </div>
+</section>
+<script>
+window.addEventListener('load', function(){
+  var lang = (window.promocaCurrentLang && window.promocaCurrentLang()) || 'fr';
+  var related = PROMOCA_PROPERTIES.filter(function(x){return x.city==='cagnes-sur-mer' && x.slug!=='villa-saona';}).slice(0,4);
+  if(related.length===0) related = PROMOCA_PROPERTIES.filter(function(x){return x.slug!=='villa-saona';}).slice(0,4);
+  document.getElementById('relatedGrid').innerHTML = related.map(function(r){
+    return '<div class="bien-card reveal in"><div class="card-media"><img src="'+r.img+'" alt="'+r.name+'"><span class="badge">'+(lang==='en'?r.badge_en:r.badge_fr)+'</span></div><div class="card-body"><h3>'+r.name+'</h3><p class="card-tag">'+(lang==='en'?r.tag_en:r.tag_fr)+'</p><p class="card-meta">'+r.price+'</p><a class="card-link" href="'+r.slug+'.html" data-fr="Découvrir" data-en="Discover">Découvrir</a></div></div>';
+  }).join('');
+});
+</script>
+
+<div id="site-footer"></div>
+<script>window.PROMOCA_ROOT = "../";</script>
+<script src="../assets/data.js"></script>
+<script src="../assets/common.js"></script>
+</body>
+</html>
