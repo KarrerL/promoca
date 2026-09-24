@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Villa Luce — Cagnes-sur-Mer — Promoca</title>
-<meta name="description" content="Villa Luce, Villas contemporaines · Du 4 au 5 pièces à Cagnes-sur-Mer. Dès 890 000 €.">
+<title>Arbor & Sense — Antibes — Promoca</title>
+<meta name="description" content="Arbor & Sense, Résidence boisée · Du 2 au 4 pièces à Antibes. Dès 355 000 €.">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"RealEstateAgent","name":"Promoca","description":"Promoteur immobilier sur la Côte d'Azur","areaServed":["Antibes","Biot","Cagnes-sur-Mer","Nice","Saint-Laurent-du-Var"],"url":"https://www.promoca.fr/"}
 </script>
@@ -299,26 +299,26 @@ footer a:hover{color:#fff;}
 <main>
 <section class="page-intro">
   <div class="wrap">
-    <div class="breadcrumb"><a href="../index.html">Accueil</a> / <a href="../nos-programmes.html">Nos programmes</a> / Villa Luce</div>
-    <h1>Villa Luce</h1>
-    <p>Villas contemporaines · Du 4 au 5 pièces · Cagnes-sur-Mer · Dès 890 000 €</p>
+    <div class="breadcrumb"><a href="../index.html">Accueil</a> / <a href="../nos-programmes.html">Nos programmes</a> / Arbor & Sense</div>
+    <h1>Arbor & Sense</h1>
+    <p>Résidence boisée · Du 2 au 4 pièces · Antibes · Dès 355 000 €</p>
   </div>
 </section>
 <section>
   <div class="wrap" style="display:grid;grid-template-columns:1.2fr 1fr;gap:60px;">
     <div class="reveal">
       <div style="border-radius:2px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,42,58,.35);">
-        <img src="https://i.imgur.com/nJ7C8aP.jpeg" alt="Villa Luce" style="width:100%;height:460px;object-fit:cover;">
+        <img src="https://i.imgur.com/CBbw2n0.jpeg" alt="Arbor & Sense" style="width:100%;height:460px;object-fit:cover;">
       </div>
     </div>
     <div class="reveal">
       <span class="badge progress" style="position:static;display:inline-block;margin-bottom:16px;">Travaux en cours</span>
-      <h2 style="font-size:1.8rem;">Villas contemporaines · Du 4 au 5 pièces</h2>
-      <p style="margin-top:14px;">Volumes ouverts sur jardin et piscine, à quinze minutes du littoral.</p>
+      <h2 style="font-size:1.8rem;">Résidence boisée · Du 2 au 4 pièces</h2>
+      <p style="margin-top:14px;">Une implantation pensée autour des arbres existants et d'un jardin partagé.</p>
       <div class="spec-grid">
-        <div><p class="k">Ville</p><p class="v">Cagnes-sur-Mer</p></div>
-        <div><p class="k">Typologie</p><p class="v">Villas contemporaines · Du 4 au 5 pièces</p></div>
-        <div><p class="k">Prix</p><p class="v">Dès 890 000 €</p></div>
+        <div><p class="k">Ville</p><p class="v">Antibes</p></div>
+        <div><p class="k">Typologie</p><p class="v">Résidence boisée · Du 2 au 4 pièces</p></div>
+        <div><p class="k">Prix</p><p class="v">Dès 355 000 €</p></div>
         <div><p class="k">Statut</p><p class="v">Travaux en cours</p></div>
       </div>
       <a href="../index.html#contact" class="btn btn-primary" style="margin-top:30px;display:inline-block;background:var(--navy-deep);color:#fff;">Être recontacté pour ce programme</a>
@@ -327,14 +327,14 @@ footer a:hover{color:#fff;}
 </section>
 <section style="background:var(--stone);">
   <div class="wrap">
-    <div class="section-head reveal"><h2>Autres programmes à Cagnes-sur-Mer</h2></div>
+    <div class="section-head reveal"><h2>Autres programmes à Antibes</h2></div>
     <div class="programs-grid" id="relatedGrid"></div>
   </div>
 </section>
 <script>
 window.addEventListener('load', function(){
-  var related = PROMOCA_PROPERTIES.filter(function(x){return x.city==='cagnes-sur-mer' && x.slug!=='villa-luce';});
-  if(related.length===0) related = PROMOCA_PROPERTIES.filter(function(x){return x.slug!=='villa-luce';}).slice(0,4);
+  var related = PROMOCA_PROPERTIES.filter(function(x){return x.city==='antibes' && x.slug!=='arbor-sense';});
+  if(related.length===0) related = PROMOCA_PROPERTIES.filter(function(x){return x.slug!=='arbor-sense';}).slice(0,4);
   document.getElementById('relatedGrid').innerHTML = related.map(function(p){return promocaCardHTML(p,'../');}).join('');
   document.querySelectorAll('#relatedGrid .reveal').forEach(function(el){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');}});});

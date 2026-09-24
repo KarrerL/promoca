@@ -4,20 +4,306 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Olea — Saint-Laurent-du-Var — Promoca</title>
-<meta name="description" content="Olea, Domaine privé à Saint-Laurent-du-Var. Dès 370 000 €.">
-<link rel="stylesheet" href="../assets/style.css">
+<meta name="description" content="Olea, Appartements · Du 2 au 5 pièces à Saint-Laurent-du-Var. Dès 298 000 €.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Promoca","description":"Promoteur immobilier sur la Côte d'Azur","areaServed":["Antibes","Biot","Cagnes-sur-Mer","Nice","Saint-Laurent-du-Var"],"url":"https://www.promoca.fr/"}
+</script>
+<style>
+/* Typographie : 35-FTR Medium (Ilott-Type) integree en base64, fournie par moi.
+   Une seule graisse disponible (Medium) : la hierarchie se fait par taille, espacement
+   et couleur plutot que par un poids "bold" inexistant dans ce fichier. Dois installer nouvelle police bodytext*/
+@font-face{
+  font-family:'FTR35';
+  src:url(../assets/fonts/FTR35.otf) format('opentype');
+  font-weight:500;
+  font-display:swap;
+}
+:root{
+  --navy:#0075A0; --navy-deep:#004E6B; --ivory:#FFFFFF; --stone:#E4F1F5;
+  --sand:#F3F9FB; --slate:#28353C; --terra:#00A6C8; --line:rgba(0,117,160,.16);
+  /* 35-FTR reservee aux gros titres uniquement (h1, h2, gros chiffres, citation) */
+  --font-display:'FTR35','Futura','Avenir Next','Helvetica Neue',Arial,sans-serif;
+  /* Police distincte pour le reste : texte courant, nav, boutons, formulaires, petits titres */
+  --font-body:'Optima','Candara','Segoe UI','Calibri',Arial,sans-serif;
+  font-size:16px;
+}
+/* Site pense en priorite pour un affichage ordinateur (grille large, densite d'information
+   propre au desktop) ; les points de rupture mobiles ci-dessous assurent une lecture correcte
+   sur petit ecran sans etre le terrain d'optimisation principal. ; ne pas oublier adaptabilité format mobile */
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:var(--font-body); color:var(--slate); background:var(--ivory); line-height:1.6; -webkit-font-smoothing:antialiased;}
+h1,h2,.serif{font-family:var(--font-display); color:var(--navy-deep); font-weight:500; line-height:1.15;}
+h3{font-family:var(--font-body); color:var(--navy-deep); font-weight:600; line-height:1.25;}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+.wrap{max-width:1360px; margin:0 auto; padding:0 40px;}
+@media(max-width:600px){.wrap{padding:0 20px;}}
+:focus-visible{outline:2px solid var(--terra); outline-offset:3px;}
+@media(prefers-reduced-motion: reduce){*{animation-duration:.01ms !important; transition-duration:.01ms !important;}}
+
+.photo{background-size:cover; background-position:center; position:relative;}
+.photo::after{content:'';position:absolute;inset:0;}
+.card-media img.photo{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;}
+.card:hover .card-media img.photo{transform:scale(1.05);}
+
+/* HEADER */
+header{position:fixed; top:0; left:0; right:0; z-index:100; transition:.35s ease; padding:26px 0;}
+header.scrolled{background:var(--ivory); padding:14px 0; box-shadow:0 1px 0 var(--line);}
+.header-row{display:flex; align-items:center; justify-content:space-between;}
+.menu-block{display:flex; align-items:center; gap:22px; position:relative;}
+.logo-link{display:flex; align-items:center;}
+.logo-img{height:36px; width:auto; display:block; filter:brightness(0) invert(1); transition:filter .35s ease, height .35s ease;}
+header.scrolled .logo-img{filter:none; height:30px;}
+.menu-toggle{display:flex; align-items:center; gap:6px; background:none; border:1px solid rgba(255,255,255,.5); color:#fff; font-family:var(--font-body); font-size:.85rem; font-weight:600; padding:9px 16px; border-radius:2px; cursor:pointer; transition:.25s;}
+.menu-toggle .chevron{transition:.25s; font-size:.75rem;}
+.menu-toggle.open .chevron{transform:rotate(180deg);}
+header.scrolled .menu-toggle{color:var(--navy-deep); border-color:var(--line);}
+.menu-toggle:hover{background:rgba(255,255,255,.12);}
+header.scrolled .menu-toggle:hover{background:var(--sand);}
+.menu-panel{position:absolute; top:0; left:calc(100% + 16px); height:100%; display:flex; align-items:center; gap:2px; background:#fff; box-shadow:0 24px 48px -18px rgba(0,78,107,.3); border-radius:2px; padding:0 6px; max-width:0; overflow:hidden; opacity:0; transition:max-width .5s ease, opacity .3s ease .1s;}
+.menu-panel.open{max-width:1000px; opacity:1;}
+.menu-panel a{color:var(--slate); font-size:.9rem; padding:14px 18px; border-radius:2px; transition:.2s; white-space:nowrap;}
+.menu-panel a:hover{background:var(--sand); color:var(--navy-deep);}
+@media(max-width:900px){
+  .menu-panel{position:fixed; top:auto; bottom:0; left:0; right:0; height:auto; flex-direction:column; align-items:stretch; max-width:none; max-height:0; padding:0; border-radius:0; transition:max-height .4s ease, opacity .3s ease;}
+  .menu-panel.open{max-height:60vh; overflow-y:auto; padding:10px;}
+  .menu-panel a{padding:16px 18px; border-bottom:1px solid var(--line);}
+}
+.header-actions{display:flex; align-items:center; gap:16px;}
+.lang{font-size:.85rem; color:#fff; opacity:.85; cursor:pointer; background:none; border:none; font-family:var(--font-body); padding:6px;}
+header.scrolled .lang{color:var(--slate);}
+.btn{display:inline-block; padding:12px 26px; font-size:.85rem; font-weight:600; border-radius:2px; transition:.25s; border:1px solid transparent; cursor:pointer; font-family:var(--font-body);}
+.btn-primary{background:#fff; color:var(--navy-deep);}
+.btn-primary:hover{background:var(--stone);}
+header.scrolled .btn-primary{background:var(--navy-deep); color:#fff;}
+header.scrolled .btn-primary:hover{background:var(--slate);}
+.btn-ghost{background:none; border:1px solid rgba(255,255,255,.5); color:#fff;}
+.btn-ghost:hover{background:rgba(255,255,255,.12);}
+header.scrolled .btn-ghost{color:var(--navy-deep); border-color:var(--line);}
+header.scrolled .btn-ghost:hover{background:var(--sand);}
+@media(max-width:900px){
+  .header-actions .lang{display:none;}
+  .btn-primary{display:none;}
+}
+@media(max-width:600px){
+  .btn-ghost{padding:10px 14px; font-size:.78rem;}
+}
+
+/* HERO */
+.hero{min-height:92vh; display:flex; align-items:center; justify-content:center; text-align:center; position:relative; background:url(../assets/img/hero.jpg) center/cover no-repeat, linear-gradient(160deg,#004E6B 0%,#0075A0 100%); overflow:hidden; padding-bottom:90px;}
+.hero::before{content:'';position:absolute; inset:0; background:linear-gradient(165deg, rgba(0,42,58,.82) 0%, rgba(0,78,107,.62) 45%, rgba(0,78,107,.38) 100%);}
+.hero-content{position:relative; max-width:640px; margin:0 auto;}
+.hero h1{font-size:clamp(3rem,7vw,5.2rem); color:#fff; margin-bottom:20px;}
+.hero p{color:rgba(255,255,255,.82); font-size:1.05rem; max-width:480px; margin:0 auto 34px;}
+.hero-ctas{justify-content:center;}
+.hero-ctas{display:flex; gap:16px; flex-wrap:wrap;}
+.btn-outline{border:1px solid rgba(255,255,255,.5); color:#fff; background:transparent;}
+.btn-outline:hover{border-color:#fff; background:rgba(255,255,255,.08);}
+.scroll-cue{position:absolute; bottom:26px; left:32px; color:rgba(255,255,255,.6); font-size:.78rem; display:flex; align-items:center; gap:10px;}
+.scroll-cue span{width:1px; height:34px; background:rgba(255,255,255,.5); display:block; animation:cue 2s infinite;}
+@keyframes cue{0%{transform:scaleY(0); transform-origin:top;}50%{transform:scaleY(1); transform-origin:top;}51%{transform-origin:bottom;}100%{transform:scaleY(0); transform-origin:bottom;}}
+
+/* SEARCH BAR */
+.search-wrap{position:relative; margin-top:-46px; z-index:5;}
+.search-bar{background:#fff; box-shadow:0 24px 48px -20px rgba(0,78,107,.3); border-radius:3px; padding:22px 26px; display:grid; grid-template-columns:repeat(6,1fr); gap:0;}
+.search-field{padding:6px 18px; border-right:1px solid var(--line);}
+.search-field:nth-child(6){border-right:none;}
+.search-field label{display:block; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; color:#8a94a0; margin-bottom:6px;}
+.search-field select{width:100%; border:none; font-family:var(--font-body); font-size:.92rem; color:var(--navy-deep); background:transparent;}
+.search-submit{grid-column:1/-1; margin-top:16px; background:var(--navy-deep); color:#fff; border:none; border-radius:2px; padding:15px 34px; font-weight:600; font-size:.88rem; cursor:pointer; transition:.2s;}
+.search-submit:hover{background:var(--terra);}
+.adv-toggle{text-align:center; margin-top:14px;}
+.adv-toggle button{background:none; border:none; font-size:.85rem; color:var(--navy-deep); text-decoration:underline; cursor:pointer;}
+.adv-panel{max-height:0; overflow:hidden; transition:.35s ease; background:#fff;}
+.adv-panel.open{max-height:400px; margin-top:2px; box-shadow:0 24px 48px -20px rgba(7,29,50,.15);}
+.adv-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:22px; padding:28px;}
+.chip{font-size:.82rem; padding:9px 14px; border:1px solid var(--line); border-radius:20px; display:inline-block; cursor:pointer; color:var(--slate);}
+.chip input{margin-right:6px;}
+@media(max-width:900px){
+  .search-bar{grid-template-columns:1fr 1fr; gap:14px;}
+  .search-field{border-right:none; border-bottom:1px solid var(--line);}
+  .search-submit{grid-column:1/-1; padding:14px; margin-top:6px;}
+  .adv-grid{grid-template-columns:1fr 1fr;}
+}
+
+/* SECTIONS */
+section{padding:120px 0;}
+.section-head{max-width:620px; margin-bottom:56px;}
+.section-head h2{font-size:clamp(2rem,4vw,2.7rem);}
+.section-head p{margin-top:16px; color:var(--slate); font-size:1.02rem;}
+
+/* PROGRAM CARDS */
+.programs-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:26px;}
+@media(max-width:1100px){.programs-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.programs-grid{grid-template-columns:1fr;}}
+.card{background:transparent; overflow:hidden; transition:.3s;}
+.card-media{aspect-ratio:3/4; position:relative; overflow:hidden; border-radius:2px;}
+.card-media .photo{width:100%; height:100%; transition:transform .5s ease;}
+.card:hover .card-media .photo{transform:scale(1.05);}
+.badge{position:absolute; top:16px; left:16px; background:rgba(255,255,255,.95); color:var(--navy-deep); font-size:.7rem; font-weight:500; padding:6px 12px; letter-spacing:.02em; border-radius:2px;}
+.badge.progress{background:var(--terra); color:#fff;}
+.card-body{padding:18px 2px 0;}
+.card-city{font-size:.78rem; letter-spacing:.04em; color:#8a94a0; margin-bottom:6px;}
+.card-body h3{font-size:1.45rem; margin-bottom:4px;}
+.card-meta{font-size:.86rem; color:var(--slate); margin-bottom:10px;}
+.card-tag{font-size:.9rem; color:var(--slate); margin-bottom:16px;}
+.card-foot{display:flex; justify-content:space-between; align-items:center; padding-top:12px;}
+.price{font-weight:700; color:var(--navy-deep);}
+.price span{font-weight:400; color:#8a94a0; font-size:.78rem;}
+.card-link{font-size:.85rem; font-weight:600; color:var(--navy-deep); border-bottom:1px solid var(--navy-deep);}
+
+/* MANIFESTO */
+.manifesto{background:var(--navy-deep); color:var(--ivory);}
+.manifesto h2{color:#fff; font-size:clamp(2rem,5vw,3.6rem); font-weight:400; max-width:900px;}
+.manifesto .lede{margin-top:30px; max-width:480px; color:rgba(246,242,235,.75);}
+.manifesto .btn-outline{margin-top:34px;}
+.pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:40px; margin-top:70px; border-top:1px solid rgba(255,255,255,.15); padding-top:44px;}
+.pillars h3{color:var(--stone); font-size:1.3rem; margin-bottom:10px;}
+.pillars p{color:rgba(246,242,235,.7); font-size:.94rem;}
+@media(max-width:800px){.pillars{grid-template-columns:1fr; gap:28px;}}
+
+/* STATS */
+.stats-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:30px; text-align:left;}
+@media(max-width:800px){.stats-grid{grid-template-columns:1fr 1fr;}}
+.stat-num{font-family:var(--font-display); font-size:3.2rem; color:var(--navy-deep);}
+.stat-label{font-size:.88rem; color:var(--slate); margin-top:6px;}
+.stats-note{margin-top:44px; font-size:.78rem; color:#8a94a0; border-top:1px solid var(--line); padding-top:18px;}
+
+/* PROCESS */
+.process{display:grid; grid-template-columns:repeat(4,1fr); gap:0;}
+@media(max-width:800px){.process{grid-template-columns:1fr 1fr;}}
+.step{padding:28px 26px 0; border-top:2px solid var(--navy-deep);}
+.step .n{font-family:var(--font-display); font-size:1.6rem; color:var(--terra); margin-bottom:14px;}
+.step h3{font-size:1.2rem; margin-bottom:8px;}
+.step p{font-size:.88rem;}
+
+/* CEO */
+.ceo{display:grid; grid-template-columns:.9fr 1.1fr; gap:60px; align-items:center;}
+@media(max-width:800px){.ceo{grid-template-columns:1fr;}}
+.ceo-photo{height:420px; border-radius:2px; background:linear-gradient(140deg,#0075A0,#004E6B);}
+.ceo blockquote{font-family:var(--font-display); font-style:italic; font-size:1.6rem; color:var(--navy-deep); line-height:1.4;}
+.signature{font-family:var(--font-body); font-style:italic; font-size:1.7rem; margin-top:26px; color:var(--navy-deep);}
+.ceo-name{margin-top:6px; font-size:.9rem; color:var(--slate);}
+
+/* NEWSLETTER + CONTACT */
+.contact-band{background:var(--sand);}
+.contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:70px;}
+@media(max-width:850px){.contact-grid{grid-template-columns:1fr; gap:44px;}}
+.field{margin-bottom:16px;}
+.field label{display:block; font-size:.8rem; margin-bottom:6px; color:var(--slate);}
+.field input,.field select,.field textarea{width:100%; padding:12px 14px; border:1px solid var(--line); background:#fff; font-family:var(--font-body); font-size:.92rem; border-radius:2px;}
+.field select,.field textarea{height:46px; resize:none;}
+.field-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.consent{font-size:.8rem; display:flex; gap:8px; align-items:flex-start; margin:14px 0 20px;}
+.confirm-msg{display:none; background:var(--navy-deep); color:#fff; padding:16px 20px; font-size:.9rem; margin-top:14px; border-radius:2px;}
+.confirm-msg.show{display:block;}
+
+/* VILLES */
+.city-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:20px;}
+@media(max-width:900px){.city-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.city-grid{grid-template-columns:1fr;}}
+.city-card{position:relative; aspect-ratio:3/4; border-radius:2px; overflow:hidden; border:none; padding:0; cursor:pointer; background:none;}
+.city-card img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+.city-card:hover img{transform:scale(1.06);}
+.city-overlay{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start; padding:18px; background:linear-gradient(0deg, rgba(0,42,58,.75) 0%, transparent 55%); text-align:left;}
+.city-name{color:#fff; font-family:var(--font-display); font-size:1.25rem;}
+.city-count{color:rgba(255,255,255,.85); font-size:.8rem; margin-top:4px;}
+
+/* CTA BREAK */
+.cta-break{background:var(--navy-deep); text-align:center;}
+.cta-break-inner{max-width:680px; margin:0 auto;}
+.cta-break h2{color:#fff; font-size:clamp(2rem,4.5vw,3rem);}
+.cta-break p{color:rgba(246,242,235,.78); margin-top:20px; font-size:1.02rem;}
+.cta-boxes{display:flex; gap:20px; margin-top:40px; flex-wrap:wrap; justify-content:center;}
+.cta-box{flex:1 1 260px; max-width:320px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.2); border-radius:2px; padding:26px 22px; text-align:left; cursor:pointer; transition:.25s;}
+.cta-box:hover{background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.4);}
+.cta-box-title{display:block; color:#fff; font-family:var(--font-display); font-size:1.2rem; margin-bottom:8px;}
+.cta-box-sub{display:block; color:rgba(246,242,235,.7); font-size:.86rem;}
+
+/* PRESSE */
+.press-grid{display:flex; flex-wrap:wrap; gap:16px 40px; align-items:center;}
+.press-grid span{font-family:var(--font-display); font-size:1.2rem; color:#8a94a0; opacity:.75; transition:.2s;}
+.press-grid span:hover{opacity:1; color:var(--navy-deep);}
+
+/* FOOTER */
+footer{background:var(--navy-deep); color:rgba(246,242,235,.75); padding:80px 0 30px;}
+.footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:50px; border-bottom:1px solid rgba(255,255,255,.12);}
+@media(max-width:800px){.footer-grid{grid-template-columns:1fr 1fr;}}
+footer h4{color:#fff; font-size:.82rem; letter-spacing:.04em; margin-bottom:18px;}
+footer ul{list-style:none;}
+footer li{margin-bottom:10px; font-size:.88rem;}
+footer a:hover{color:#fff;}
+.footer-bottom{display:flex; justify-content:space-between; padding-top:24px; font-size:.78rem; flex-wrap:wrap; gap:10px;}
+
+/* CHATBOT */
+.chat-btn{position:fixed; bottom:26px; right:26px; width:58px; height:58px; border-radius:50%; background:var(--navy-deep); color:#fff; border:none; cursor:pointer; z-index:90; box-shadow:0 10px 24px rgba(7,29,50,.35); font-size:1.4rem;}
+.chat-panel{position:fixed; bottom:96px; right:26px; width:300px; background:#fff; border-radius:6px; box-shadow:0 20px 50px rgba(7,29,50,.3); z-index:90; display:none; overflow:hidden;}
+.chat-panel.open{display:block;}
+.chat-head{background:var(--navy-deep); color:#fff; padding:16px 18px; font-size:.9rem;}
+.chat-body{padding:16px 18px;}
+.chat-body p{font-size:.85rem; margin-bottom:14px;}
+.chat-opt{display:block; width:100%; text-align:left; background:var(--ivory); border:1px solid var(--line); padding:10px 12px; margin-bottom:8px; font-size:.83rem; border-radius:3px; cursor:pointer;}
+.chat-opt:hover{background:var(--stone);}
+
+/* MODALES */
+.modal-overlay{position:fixed; inset:0; background:rgba(0,30,42,.55); z-index:200; display:none; align-items:center; justify-content:center; padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#fff; border-radius:3px; padding:36px; width:100%; max-width:420px; position:relative; max-height:90vh; overflow-y:auto;}
+.modal-close{position:absolute; top:16px; right:16px; background:none; border:none; font-size:1.1rem; cursor:pointer; color:var(--slate);}
+.modal-tabs{display:flex; gap:10px; margin-bottom:24px; border-bottom:1px solid var(--line);}
+.modal-tab{background:none; border:none; padding:10px 4px 14px; font-size:.92rem; font-weight:600; color:#8a94a0; cursor:pointer; border-bottom:2px solid transparent; margin-right:18px;}
+.modal-tab.active{color:var(--navy-deep); border-bottom-color:var(--navy-deep);}
+.modal-form .field{margin-bottom:14px;}
+.newsletter-box h3{font-size:1.5rem; margin-bottom:12px;}
+.newsletter-box p{font-size:.92rem; margin-bottom:22px;}
+.newsletter-box .field{margin-bottom:16px;}
+
+.reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1; transform:none;}
+
+/* PAGE INTRO (sous-pages) */
+.page-intro{padding:170px 0 60px; background:var(--stone);}
+.page-intro h1{font-size:clamp(2.2rem,4vw,3.2rem);}
+.page-intro p{margin-top:14px; color:var(--slate); max-width:640px; font-size:1.02rem;}
+.breadcrumb{font-size:.8rem; color:#8a94a0; margin-bottom:14px;}
+.breadcrumb a{color:var(--navy-deep);}
+.spec-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; padding-top:24px; border-top:1px solid var(--line);}
+.spec-grid .k{font-size:.75rem; color:#8a94a0;}
+.spec-grid .v{font-weight:600; color:var(--navy-deep); margin-top:2px;}
+.map-embed{width:100%; height:380px; border:0; border-radius:2px;}
+</style>
 </head>
 <body>
-<header id="siteHeader" class="solid"><div id="site-header"></div></header>
-
-<section class="page-hero">
+<header id="siteHeader">
+  <div class="wrap header-row">
+    <div class="menu-block">
+      <button class="menu-toggle" id="menuToggle" aria-haspopup="true" aria-expanded="false">Menu <span class="chevron">▾</span></button>
+      <a href="../index.html" class="logo-link"><img class="logo-img" src="../assets/img/logo.png" alt="Promoca — construisons votre cadre de vie"></a>
+      <div class="menu-panel" id="menuPanel">
+        <a href="../nos-biens.html" data-en="Our properties" data-fr="Nos biens">Nos biens</a>
+        <a href="../nos-programmes.html" data-en="Our developments" data-fr="Nos programmes">Nos programmes</a>
+        <a href="../notre-groupe.html" data-en="Our group" data-fr="Notre groupe">Notre groupe</a>
+        <a href="../investir.html" data-en="Invest" data-fr="Investir">Investir</a>
+        <a href="../atouts-du-neuf.html" data-en="New-build advantages" data-fr="Atouts du neuf">Atouts du neuf</a>
+        <a href="../index.html#contact" data-en="Contact" data-fr="Contact">Contact</a>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="lang" id="langToggle" tabindex="0" aria-label="Changer la langue">FR / EN</button>
+      <button class="btn btn-ghost" id="accountToggle" data-en="Sign in / Register" data-fr="Mon compte">Mon compte</button>
+      <a href="../index.html#contact" class="btn btn-primary" data-en="Book an appointment" data-fr="Prendre rendez-vous">Prendre rendez-vous</a>
+    </div>
+  </div>
+</header>
+<script src="../assets/data.js"></script>
+<main>
+<section class="page-intro">
   <div class="wrap">
-    <div class="breadcrumb"><a href="../index.html" data-fr="Accueil" data-en="Home">Accueil</a> / <a href="../nos-programmes.html" data-fr="Nos programmes" data-en="Our developments">Nos programmes</a> / <span>Olea</span></div>
-    <h1 style="font-size:2.6rem;">Olea</h1>
-    <p style="max-width:640px;margin-top:10px;" data-fr="Domaine privé · Saint-Laurent-du-Var · Dès 370 000 €" data-en="Private domain · Saint-Laurent-du-Var · Dès 370 000 €">Domaine privé · Saint-Laurent-du-Var · Dès 370 000 €</p>
+    <div class="breadcrumb"><a href="../index.html">Accueil</a> / <a href="../nos-programmes.html">Nos programmes</a> / Olea</div>
+    <h1>Olea</h1>
+    <p>Appartements · Du 2 au 5 pièces · Saint-Laurent-du-Var · Dès 298 000 €</p>
   </div>
 </section>
-
 <section>
   <div class="wrap" style="display:grid;grid-template-columns:1.2fr 1fr;gap:60px;">
     <div class="reveal">
@@ -26,40 +312,202 @@
       </div>
     </div>
     <div class="reveal">
-      <span class="badge" style="position:static;display:inline-block;margin-bottom:16px;" data-fr="Commercialisation en cours" data-en="On sale now">Commercialisation en cours</span>
-      <h2 style="font-size:1.8rem;" data-fr="Domaine privé" data-en="Private domain">Domaine privé</h2>
-      <p style="margin-top:14px;" data-fr="Quartier Montaleigne à Saint-Laurent-du-Var : domaine privé de 10 appartements avec piscine, jardins suspendus et vue mer. Architecture contemporaine aux tons sable, taupe et gris soie, végétation méditerranéenne." data-en="Montaleigne district, Saint-Laurent-du-Var: a private domain of 10 apartments with pool, hanging gardens and sea views. Contemporary architecture in sand, taupe and silk-grey tones, Mediterranean planting.">Quartier Montaleigne à Saint-Laurent-du-Var : domaine privé de 10 appartements avec piscine, jardins suspendus et vue mer. Architecture contemporaine aux tons sable, taupe et gris soie, végétation méditerranéenne.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line);">
-        <div><p style="font-size:.75rem;color:#8a94a0;" data-fr="Ville" data-en="City">Ville</p><p style="font-weight:600;color:var(--navy-deep);">Saint-Laurent-du-Var</p></div>
-        <div><p style="font-size:.75rem;color:#8a94a0;" data-fr="Typologie" data-en="Layout">Typologie</p><p style="font-weight:600;color:var(--navy-deep);">Du 2 au 5 pièces</p></div>
-        <div><p style="font-size:.75rem;color:#8a94a0;" data-fr="Surface" data-en="Surface">Surface</p><p style="font-weight:600;color:var(--navy-deep);">49-121 m²</p></div>
-        <div><p style="font-size:.75rem;color:#8a94a0;" data-fr="Prix" data-en="Price">Prix</p><p style="font-weight:600;color:var(--navy-deep);">Dès 370 000 €</p></div>
+      <span class="badge progress" style="position:static;display:inline-block;margin-bottom:16px;">Dernières opportunités</span>
+      <h2 style="font-size:1.8rem;">Appartements · Du 2 au 5 pièces</h2>
+      <p style="margin-top:14px;">Terrasses filantes et vue dégagée sur la vallée du Var.</p>
+      <div class="spec-grid">
+        <div><p class="k">Ville</p><p class="v">Saint-Laurent-du-Var</p></div>
+        <div><p class="k">Typologie</p><p class="v">Appartements · Du 2 au 5 pièces</p></div>
+        <div><p class="k">Prix</p><p class="v">Dès 298 000 €</p></div>
+        <div><p class="k">Statut</p><p class="v">Dernières opportunités</p></div>
       </div>
-      <a href="../index.html#contact" class="btn btn-primary" style="margin-top:30px;display:inline-block;background:var(--navy-deep);color:#fff;" data-fr="Être recontacté pour ce programme" data-en="Request a callback about this development">Être recontacté pour ce programme</a>
+      <a href="../index.html#contact" class="btn btn-primary" style="margin-top:30px;display:inline-block;background:var(--navy-deep);color:#fff;">Être recontacté pour ce programme</a>
     </div>
   </div>
 </section>
-
 <section style="background:var(--stone);">
   <div class="wrap">
-    <div class="section-head reveal"><h2 data-fr="Autres programmes à Saint-Laurent-du-Var" data-en="Other developments in Saint-Laurent-du-Var">Autres programmes à Saint-Laurent-du-Var</h2></div>
-    <div class="biens-grid" id="relatedGrid"></div>
+    <div class="section-head reveal"><h2>Autres programmes à Saint-Laurent-du-Var</h2></div>
+    <div class="programs-grid" id="relatedGrid"></div>
   </div>
 </section>
 <script>
 window.addEventListener('load', function(){
-  var lang = (window.promocaCurrentLang && window.promocaCurrentLang()) || 'fr';
-  var related = PROMOCA_PROPERTIES.filter(function(x){return x.city==='saint-laurent-du-var' && x.slug!=='olea';}).slice(0,4);
+  var related = PROMOCA_PROPERTIES.filter(function(x){return x.city==='saint-laurent-du-var' && x.slug!=='olea';});
   if(related.length===0) related = PROMOCA_PROPERTIES.filter(function(x){return x.slug!=='olea';}).slice(0,4);
-  document.getElementById('relatedGrid').innerHTML = related.map(function(r){
-    return '<div class="bien-card reveal in"><div class="card-media"><img src="'+r.img+'" alt="'+r.name+'"><span class="badge">'+(lang==='en'?r.badge_en:r.badge_fr)+'</span></div><div class="card-body"><h3>'+r.name+'</h3><p class="card-tag">'+(lang==='en'?r.tag_en:r.tag_fr)+'</p><p class="card-meta">'+r.price+'</p><a class="card-link" href="'+r.slug+'.html" data-fr="Découvrir" data-en="Discover">Découvrir</a></div></div>';
-  }).join('');
+  document.getElementById('relatedGrid').innerHTML = related.map(function(p){return promocaCardHTML(p,'../');}).join('');
+  document.querySelectorAll('#relatedGrid .reveal').forEach(function(el){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');}});});
+    io.observe(el);
+  });
 });
 </script>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="logo" src="../assets/img/logo.png" style="height:32px;filter:brightness(0) invert(1);margin-bottom:14px;" alt="Promoca">
+        <p style="font-size:.88rem; max-width:280px;">Promoteur immobilier ancré sur la Côte d'Azur, engagé pour des lieux de vie durables.</p>
+      </div>
+      <div><h4>Navigation</h4><ul><li><a href="../nos-programmes.html">Nos programmes</a></li><li><a href="../nos-biens.html">Nos biens</a></li><li><a href="../notre-groupe.html">Notre groupe</a></li><li><a href="../atouts-du-neuf.html">Atouts du neuf</a></li><li><a href="../index.html#contact">Contact</a></li></ul></div>
+      <div><h4>Secteurs</h4><ul><li><a href="../villes/antibes.html">Antibes</a></li><li><a href="../villes/biot.html">Biot</a></li><li><a href="../villes/cagnes-sur-mer.html">Cagnes-sur-Mer</a></li><li><a href="../villes/saint-laurent-du-var.html">Saint-Laurent-du-Var</a></li><li><a href="../villes/nice.html">Nice</a></li></ul></div>
+      <div><h4>Informations</h4><ul><li><a href="../legal/mentions-legales.html">Mentions légales</a></li><li><a href="../legal/confidentialite.html">Confidentialité</a></li><li><a href="../legal/cookies.html">Cookies</a></li><li><a href="../legal/accessibilite.html">Accessibilité</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Promoca. Tous droits réservés. Ce site internet n'est qu'une démo, il n'est utile qu'à des fins de développement.</span>
+      <span>FR / EN · LinkedIn · Instagram</span>
+    </div>
+  </div>
+</footer>
 
-<div id="site-footer"></div>
-<script>window.PROMOCA_ROOT = "../";</script>
-<script src="../assets/data.js"></script>
-<script src="../assets/common.js"></script>
+<div class="modal-overlay" id="accountOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="accountClose" aria-label="Fermer">✕</button>
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-tab="login">Se connecter</button>
+      <button class="modal-tab" data-tab="register">Créer un compte</button>
+    </div>
+    <form id="loginForm" class="modal-form">
+      <div class="field"><label for="loginEmail">E-mail</label><input id="loginEmail" type="email" required></div>
+      <div class="field"><label for="loginPass">Mot de passe</label><input id="loginPass" type="password" required></div>
+      <button type="submit" class="btn btn-primary" style="background:var(--navy-deep); color:#fff; width:100%;">Se connecter</button>
+      <div class="confirm-msg" id="loginConfirm">Connexion simulée — bienvenue sur votre espace Promoca.</div>
+    </form>
+    <form id="registerForm" class="modal-form" style="display:none;">
+      <div class="field-row">
+        <div class="field"><label for="regPrenom">Prénom</label><input id="regPrenom" type="text" required></div>
+        <div class="field"><label for="regNom">Nom</label><input id="regNom" type="text" required></div>
+      </div>
+      <div class="field"><label for="regEmail">E-mail</label><input id="regEmail" type="email" required></div>
+      <div class="field"><label for="regPass">Mot de passe</label><input id="regPass" type="password" required></div>
+      <button type="submit" class="btn btn-primary" style="background:var(--navy-deep); color:#fff; width:100%;">Créer mon compte</button>
+      <div class="confirm-msg" id="registerConfirm">Compte créé (simulation) — vous pouvez désormais suivre vos biens favoris.</div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="newsletterPopup">
+  <div class="modal-box newsletter-box">
+    <button class="modal-close" id="newsletterPopupClose" aria-label="Fermer">✕</button>
+    <h3>Ne manquez aucune opportunité</h3>
+    <p>Recevez en avant-première les nouveaux programmes Promoca sur la Côte d'Azur.</p>
+    <form id="popupNewsForm">
+      <div class="field"><label for="popupEmail">E-mail</label><input id="popupEmail" type="email" required></div>
+      <button type="submit" class="btn btn-primary" style="background:var(--navy-deep); color:#fff; width:100%;">Je m'inscris</button>
+    </form>
+    <div class="confirm-msg" id="popupConfirm">Merci, votre inscription est enregistrée.</div>
+  </div>
+</div>
+
+<button class="chat-btn" id="chatBtn" aria-label="Ouvrir le chat">💬</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">Conseiller Promoca</div>
+  <div class="chat-body">
+    <p>Bonjour, comment pouvons-nous vous accompagner dans votre projet immobilier ?</p>
+    <button class="chat-opt">Découvrir un programme</button>
+    <button class="chat-opt">Prendre rendez-vous</button>
+    <button class="chat-opt">Investir dans le neuf</button>
+    <button class="chat-opt">Contacter un conseiller</button>
+  </div>
+</div>
+
+<script>
+// Header scroll state
+const header=document.getElementById('siteHeader');
+window.addEventListener('scroll',()=>{header.classList.toggle('scrolled', window.scrollY>60);});
+
+// Menu déroulant
+const menuToggle=document.getElementById('menuToggle'), menuPanel=document.getElementById('menuPanel');
+menuToggle.addEventListener('click',()=>{
+  const open=menuPanel.classList.toggle('open');
+  menuToggle.classList.toggle('open',open);
+  menuToggle.setAttribute('aria-expanded',open);
+});
+menuPanel.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menuPanel.classList.remove('open'); menuToggle.classList.remove('open');}));
+document.addEventListener('click',(e)=>{
+  if(!e.target.closest('.menu-block')){menuPanel.classList.remove('open'); menuToggle.classList.remove('open');}
+});
+
+// Compte : modale connexion / inscription
+const accountOverlay=document.getElementById('accountOverlay');
+document.getElementById('accountToggle').addEventListener('click',()=>accountOverlay.classList.add('open'));
+document.getElementById('accountClose').addEventListener('click',()=>accountOverlay.classList.remove('open'));
+accountOverlay.addEventListener('click',e=>{if(e.target===accountOverlay) accountOverlay.classList.remove('open');});
+document.querySelectorAll('.modal-tab').forEach(tab=>tab.addEventListener('click',()=>{
+  document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById('loginForm').style.display = tab.dataset.tab==='login' ? 'block' : 'none';
+  document.getElementById('registerForm').style.display = tab.dataset.tab==='register' ? 'block' : 'none';
+}));
+document.getElementById('loginForm').addEventListener('submit',e=>{e.preventDefault(); document.getElementById('loginConfirm').classList.add('show');});
+document.getElementById('registerForm').addEventListener('submit',e=>{e.preventDefault(); document.getElementById('registerConfirm').classList.add('show');});
+
+// Popup newsletter : apparaît une fois après quelques secondes
+const newsletterPopup=document.getElementById('newsletterPopup');
+let popupShown=false;
+setTimeout(()=>{ if(!popupShown){ newsletterPopup.classList.add('open'); popupShown=true; } },5000);
+document.getElementById('newsletterPopupClose').addEventListener('click',()=>newsletterPopup.classList.remove('open'));
+newsletterPopup.addEventListener('click',e=>{if(e.target===newsletterPopup) newsletterPopup.classList.remove('open');});
+document.getElementById('popupNewsForm').addEventListener('submit',e=>{e.preventDefault(); document.getElementById('popupConfirm').classList.add('show'); setTimeout(()=>newsletterPopup.classList.remove('open'),1600);});
+
+// CTA "Échanger avec un conseiller" : ouvre le chatbot (présent uniquement sur certaines pages)
+const ctaAdvisorBtn=document.getElementById('ctaAdvisor');
+if(ctaAdvisorBtn) ctaAdvisorBtn.addEventListener('click',()=>{
+  document.getElementById('chatPanel').classList.add('open');
+  document.getElementById('chatPanel').scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+// FR / EN fonctionnel (traduction des éléments clés de navigation et de structure)
+let currentLang='fr';
+const langToggle=document.getElementById('langToggle');
+langToggle.addEventListener('click',()=>{
+  currentLang = currentLang==='fr' ? 'en' : 'fr';
+  document.documentElement.lang = currentLang;
+  document.querySelectorAll('[data-en][data-fr]').forEach(el=>{
+    el.innerHTML = currentLang==='en' ? el.dataset.en : el.dataset.fr;
+  });
+  langToggle.textContent = currentLang==='en' ? 'EN / FR' : 'FR / EN';
+});
+
+// Recherche (barre présente uniquement sur la page d'accueil)
+const advToggle=document.getElementById('advToggle'), advPanel=document.getElementById('advPanel'), searchBtn=document.getElementById('searchBtn');
+if(advToggle) advToggle.addEventListener('click',()=>{advPanel.classList.toggle('open'); advToggle.textContent=advPanel.classList.contains('open')?'Masquer la recherche avancée':'Recherche avancée';});
+if(searchBtn) searchBtn.addEventListener('click',()=>{
+  const p = new URLSearchParams();
+  const loc=document.getElementById('loc').value, type=document.getElementById('type').value,
+        budget=document.getElementById('budget').value, pieces=document.getElementById('pieces').value;
+  if(loc && loc!=='all') p.set('ville', loc);
+  if(type && type!=='all') p.set('type', type);
+  if(budget && budget!=='all') p.set('budget', budget);
+  if(pieces && pieces!=='all') p.set('pieces', pieces);
+  window.location.href = '../nos-biens.html' + (p.toString() ? '?'+p.toString() : '');
+});
+
+// Reveal on scroll
+const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in'); io.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Animated counters
+const counted=new Set();
+const cio=new IntersectionObserver((entries)=>{entries.forEach(e=>{
+  if(e.isIntersecting && !counted.has(e.target)){
+    counted.add(e.target);
+    const target=+e.target.dataset.count; let cur=0;
+    const step=Math.max(1,Math.round(target/40));
+    const t=setInterval(()=>{cur+=step; if(cur>=target){cur=target; clearInterval(t);} e.target.textContent=cur;},30);
+  }
+});},{threshold:.4});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+// Forms (présents uniquement sur la page d'accueil)
+const newsFormEl=document.getElementById('newsForm'), contactFormEl=document.getElementById('contactForm');
+if(newsFormEl) newsFormEl.addEventListener('submit',e=>{e.preventDefault(); document.getElementById('nlConfirm').classList.add('show'); e.target.reset();});
+if(contactFormEl) contactFormEl.addEventListener('submit',e=>{e.preventDefault(); document.getElementById('cConfirm').classList.add('show'); e.target.reset();});
+
+// Chatbot
+const chatBtn=document.getElementById('chatBtn'), chatPanel=document.getElementById('chatPanel');
+chatBtn.addEventListener('click',()=>chatPanel.classList.toggle('open'));
+</script>
 </body>
 </html>
