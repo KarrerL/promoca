@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nos biens — Promoca</title>
+<meta name="description" content="Découvrez l'ensemble des biens Promoca disponibles sur la Côte d'Azur.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header id="siteHeader" class="solid"><div id="site-header"></div></header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a> / <span data-fr="Nos biens" data-en="Our properties">Nos biens</span></div>
+    <h1 data-fr="Nos biens" data-en="Our properties">Nos biens</h1>
+    <p style="max-width:640px;margin-top:12px;" data-fr="Toute la sélection de biens Promoca actuellement disponibles sur la Côte d'Azur." data-en="Our full selection of Promoca properties currently available on the French Riviera.">Toute la sélection de biens Promoca actuellement disponibles sur la Côte d'Azur.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <form id="filterForm" style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:16px;">
+      <select id="fVille" style="flex:1;min-width:170px;padding:12px;border:1px solid var(--line);border-radius:2px;">
+        <option value="all" data-fr="Toutes les villes" data-en="All cities">Toutes les villes</option>
+        <option value="antibes">Antibes</option><option value="biot">Biot</option>
+        <option value="cagnes-sur-mer">Cagnes-sur-Mer</option><option value="nice">Nice</option>
+        <option value="saint-laurent-du-var">Saint-Laurent-du-Var</option>
+      </select>
+      <select id="fType" style="flex:1;min-width:150px;padding:12px;border:1px solid var(--line);border-radius:2px;">
+        <option value="all" data-fr="Tous types" data-en="All types">Tous types</option>
+        <option value="appartement" data-fr="Appartement" data-en="Apartment">Appartement</option>
+        <option value="villa">Villa</option>
+        <option value="bureau" data-fr="Bureau / commerce" data-en="Office / retail">Bureau / commerce</option>
+        <option value="terrain" data-fr="Terrain" data-en="Land">Terrain</option>
+      </select>
+      <select id="fBudget" style="flex:1;min-width:170px;padding:12px;border:1px solid var(--line);border-radius:2px;">
+        <option value="all" data-fr="Indifférent" data-en="Any">Indifférent</option>
+        <option value="300" data-fr="Jusqu'à 300 000 €" data-en="Up to €300,000">Jusqu'à 300 000 €</option>
+        <option value="300-600" data-fr="300 000 - 600 000 €" data-en="€300,000 - €600,000">300 000 - 600 000 €</option>
+        <option value="600" data-fr="600 000 € et plus" data-en="€600,000 and above">600 000 € et plus</option>
+      </select>
+      <select id="fPieces" style="flex:1;min-width:130px;padding:12px;border:1px solid var(--line);border-radius:2px;">
+        <option value="all" data-fr="Pièces" data-en="Rooms">Pièces</option>
+        <option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5+">5+</option>
+      </select>
+      <input id="fQuery" type="text" style="flex:2;min-width:200px;padding:12px;border:1px solid var(--line);border-radius:2px;" data-fr-ph="Nom d'un programme, mot-clé…" data-en-ph="Development name, keyword…" placeholder="Nom d'un programme, mot-clé…">
+      <button class="btn btn-primary" type="submit" style="background:var(--navy-deep);color:#fff;" data-fr="Filtrer" data-en="Filter">Filtrer</button>
+    </form>
+    <p id="resultsFeedback" style="font-size:.85rem;color:var(--navy-deep);margin-bottom:16px;"></p>
+    <div class="biens-grid" id="biensGrid"></div>
+    <p id="noResults" style="display:none;text-align:center;padding:40px 0;opacity:.7;" data-fr="Aucun bien ne correspond à votre recherche pour le moment." data-en="No property currently matches your search.">Aucun bien ne correspond à votre recherche pour le moment.</p>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script>window.PROMOCA_ROOT = "";</script>
+<script src="assets/data.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var fVille=document.getElementById('fVille'), fType=document.getElementById('fType'),
+      fBudget=document.getElementById('fBudget'), fPieces=document.getElementById('fPieces'), fQuery=document.getElementById('fQuery');
+  if(params.get('ville')) fVille.value = params.get('ville');
+  if(params.get('type')) fType.value = params.get('type');
+  if(params.get('budget')) fBudget.value = params.get('budget');
+  if(params.get('pieces')) fPieces.value = params.get('pieces');
+  if(params.get('q')) fQuery.value = params.get('q');
+
+  function render(){
+    var list = promocaFilterProperties({ville:fVille.value, type:fType.value, budget:fBudget.value, pieces:fPieces.value, q:fQuery.value});
+    var grid=document.getElementById('biensGrid'), fb=document.getElementById('resultsFeedback'), none=document.getElementById('noResults');
+    var lang = (window.promocaCurrentLang && window.promocaCurrentLang()) || 'fr';
+    fb.textContent = lang==='en'
+      ? (list.length + (list.length>1?" properties match your search.":" property matches your search."))
+      : (list.length + (list.length>1?" biens correspondent à votre recherche.":" bien correspond à votre recherche."));
+    if(list.length===0){ grid.style.display='none'; none.style.display='block'; }
+    else {
+      grid.style.display='grid'; none.style.display='none';
+      grid.innerHTML = list.map(function(p){
+        return '<div class="bien-card reveal in"><div class="card-media"><img src="'+p.img+'" alt="'+p.name+'"><span class="badge">'+(lang==='en'?p.badge_en:p.badge_fr)+'</span></div><div class="card-body"><h3>'+p.name+'</h3><p class="card-tag">'+(lang==='en'?p.tag_en:p.tag_fr)+' · '+promocaCityName(p.city)+'</p><p class="card-meta">'+p.price+'</p><a class="card-link" href="biens/'+p.slug+'.html" data-fr="Découvrir" data-en="Discover">Découvrir</a></div></div>';
+      }).join('');
+    }
+  }
+  document.getElementById('filterForm').addEventListener('submit', function(e){e.preventDefault();render();});
+  [fVille,fType,fBudget,fPieces].forEach(function(el){el.addEventListener('change', render);});
+  window.promocaOnLangChange = render;
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nos programmes — Promoca</title>
+<meta name="description" content="Découvrez l'ensemble des programmes immobiliers Promoca sur la Côte d'Azur.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header id="siteHeader" class="solid"><div id="site-header"></div></header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="breadcrumb"><a href="index.html" data-fr="Accueil" data-en="Home">Accueil</a> / <span data-fr="Nos programmes" data-en="Our developments">Nos programmes</span></div>
+    <h1 data-fr="Nos programmes" data-en="Our developments">Nos programmes</h1>
+    <p style="max-width:640px;margin-top:12px;" data-fr="Une sélection de résidences et de villas choisies pour leur emplacement, leur architecture et leur potentiel de vie." data-en="A selection of residences and villas chosen for their location, architecture and living potential.">Une sélection de résidences et de villas choisies pour leur emplacement, leur architecture et leur potentiel de vie.</p>
+  </div>
+</section>
+
+<section><div class="wrap"><div class="biens-grid" id="progGrid"></div></div></section>
+
+<div id="site-footer"></div>
+
+<script>window.PROMOCA_ROOT = "";</script>
+<script src="assets/data.js"></script>
+<script src="assets/common.js"></script>
+<script>
+function renderProg(){
+  var lang = (window.promocaCurrentLang && window.promocaCurrentLang()) || 'fr';
+  document.getElementById('progGrid').innerHTML = PROMOCA_PROPERTIES.map(function(p){
+    return '<div class="bien-card reveal in"><div class="card-media"><img src="'+p.img+'" alt="'+p.name+'"><span class="badge">'+(lang==='en'?p.badge_en:p.badge_fr)+'</span></div><div class="card-body"><h3>'+p.name+'</h3><p class="card-tag">'+(lang==='en'?p.tag_en:p.tag_fr)+' · '+p.pieces+'</p><p class="card-meta">'+promocaCityName(p.city)+'</p><a class="card-link" href="biens/'+p.slug+'.html" data-fr="Découvrir le programme" data-en="Discover the development">Découvrir le programme</a></div></div>';
+  }).join('');
+}
+renderProg();
+window.promocaOnLangChange = renderProg;
+</script>
+</body>
+</html>
